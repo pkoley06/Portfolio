@@ -16,7 +16,6 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="sections.css" />
   </head>
@@ -462,10 +461,15 @@
             </div>
           </div>
           <div class="contact-form-wrapper">
-            <form class="contact-form" id="contactForm">
+            <form
+              class="contact-form"
+              id="contactForm"
+              action="https://formspree.io/f/xeelejoj"
+              method="POST"
+            >
               <div class="form-group">
-                <label for="name">Your Name</label
-                ><input
+                <label for="name">Your Name</label>
+                <input
                   type="text"
                   id="name"
                   name="name"
@@ -474,8 +478,8 @@
                 />
               </div>
               <div class="form-group">
-                <label for="email">Email</label
-                ><input
+                <label for="email">Email</label>
+                <input
                   type="email"
                   id="email"
                   name="email"
@@ -484,8 +488,8 @@
                 />
               </div>
               <div class="form-group">
-                <label for="message">Message</label
-                ><textarea
+                <label for="message">Message</label>
+                <textarea
                   id="message"
                   name="message"
                   rows="5"

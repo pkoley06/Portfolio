@@ -128,16 +128,8 @@ revealElements.forEach((el) => {
   revealObserver.observe(el);
 });
 
-// ===== Form Handling with EmailJS =====
+// ===== Form Handling with Formspree =====
 const contactForm = document.getElementById("contactForm");
-
-// EmailJS Configuration
-const EMAILJS_PUBLIC_KEY = "YOM48PbuaiE2fIt41";
-const EMAILJS_SERVICE_ID = "service_pdtvl4e";
-const EMAILJS_TEMPLATE_ID = "template_h3foopw";
-
-// Initialize EmailJS once on page load
-emailjs.init(EMAILJS_PUBLIC_KEY);
 
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -145,29 +137,28 @@ contactForm.addEventListener("submit", async (e) => {
   const btn = contactForm.querySelector('button[type="submit"]');
   const originalContent = btn.innerHTML;
 
-  // Get form data
-  const formData = new FormData(contactForm);
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const message = formData.get("message");
-
   // Show loading state
   btn.innerHTML = '<i class="ph ph-spinner"></i> Sending...';
   btn.disabled = true;
 
   try {
-    // Send email using EmailJS
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      from_name: name,
-      from_email: email,
-      message: message,
-      to_email: "pkoley06@gmail.com",
+    const formData = new FormData(contactForm);
+    const response = await fetch("https://formspree.io/f/xeelejoj", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
     });
 
-    // Success
-    btn.innerHTML = '<i class="ph ph-check-circle"></i> Message Sent!';
-    btn.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
-    contactForm.reset();
+    if (response.ok) {
+      // Success
+      btn.innerHTML = '<i class="ph ph-check-circle"></i> Message Sent!';
+      btn.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
+      contactForm.reset();
+    } else {
+      throw new Error("Form submission failed");
+    }
 
     // Reset button after 3 seconds
     setTimeout(() => {
@@ -176,8 +167,7 @@ contactForm.addEventListener("submit", async (e) => {
       btn.disabled = false;
     }, 3000);
   } catch (error) {
-    console.error("EmailJS Error:", error);
-    console.error("Error details:", JSON.stringify(error));
+    console.error("Formspree Error:", error);
 
     // Show error message on button
     btn.innerHTML = '<i class="ph ph-x-circle"></i> Failed to Send';
@@ -185,7 +175,7 @@ contactForm.addEventListener("submit", async (e) => {
 
     // Show alert with helpful message
     alert(
-      "Message could not be sent. Please try again or email me directly at pkoley06@gmail.com"
+      "Message could not be sent. Please email me directly at pkoley06@gmail.com"
     );
 
     // Reset button after 3 seconds
