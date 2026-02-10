@@ -162,11 +162,20 @@
   color: var(--color-text-muted);
 }
 .company-name {
-  display: block;
   font-size: 14px;
   font-weight: 500;
   color: var(--color-accent-secondary);
+}
+.company-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 8px;
+}
+.company-logo {
+  height: 32px;
+  width: auto;
+  border-radius: 4px; /* Optional, for cleaner look */
 }
 
 /* ===== Projects Section ===== */
