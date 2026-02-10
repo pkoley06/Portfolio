@@ -177,21 +177,16 @@ contactForm.addEventListener("submit", async (e) => {
     }, 3000);
   } catch (error) {
     console.error("EmailJS Error:", error);
+    console.error("Error details:", JSON.stringify(error));
 
-    // Fallback: Open email client with pre-filled message
-    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    window.open(
-      `mailto:pkoley06@gmail.com?subject=${subject}&body=${body}`,
-      "_blank"
-    );
+    // Show error message on button
+    btn.innerHTML = '<i class="ph ph-x-circle"></i> Failed to Send';
+    btn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
 
-    // Show fallback message
-    btn.innerHTML =
-      '<i class="ph ph-envelope-open"></i> Opening Email Client...';
-    btn.style.background = "linear-gradient(135deg, #f59e0b, #d97706)";
+    // Show alert with helpful message
+    alert(
+      "Message could not be sent. Please try again or email me directly at pkoley06@gmail.com"
+    );
 
     // Reset button after 3 seconds
     setTimeout(() => {
