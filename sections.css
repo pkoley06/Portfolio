@@ -238,6 +238,9 @@
 }
 .project-content {
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .project-tags {
   display: flex;
@@ -262,41 +265,51 @@
   font-size: 14px;
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  flex-grow: 1; /* Pushes links to bottom */
 }
 .project-links {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
 }
 .store-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: var(--radius-full);
-  font-size: 12px;
-  font-weight: 600;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
   text-decoration: none;
-  transition: var(--transition-fast);
+  transition: all 0.2s ease;
   background: var(--color-bg-tertiary);
-  border: 1px solid var(--color-border);
   color: var(--color-text-primary);
-}
-.store-link:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-accent-primary);
-  color: var(--color-accent-primary);
-  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid transparent;
 }
 .store-link i {
-  font-size: 16px;
+  font-size: 18px;
+  transition: color 0.2s ease;
 }
-.store-link.android:hover i {
+/* Android/Play Store Style */
+.store-link.android:hover {
+  background: rgba(61, 220, 132, 0.1);
+  color: #3ddc84;
+  border-color: rgba(61, 220, 132, 0.2);
+}
+.store-link.android i {
   color: #3ddc84;
 }
-.store-link.ios:hover i {
+/* iOS/App Store Style */
+.store-link.ios:hover {
+  background: rgba(0, 122, 255, 0.1);
+  color: #007aff;
+  border-color: rgba(0, 122, 255, 0.2);
+}
+.store-link.ios i {
   color: #007aff;
 }
 

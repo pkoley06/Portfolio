@@ -93,7 +93,7 @@ const heroObserver = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.5 }
+  { threshold: 0.1 }
 );
 
 const heroSection = document.getElementById("hero");
